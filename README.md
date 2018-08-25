@@ -1,6 +1,7 @@
 # Discord Marriage Bot
 
 [![Build Status](https://travis-ci.com/dotboris/discord-marriage-bot.svg?branch=master)](https://travis-ci.com/dotboris/discord-marriage-bot)
+[![codecov](https://codecov.io/gh/dotboris/discord-marriage-bot/branch/master/graph/badge.svg)](https://codecov.io/gh/dotboris/discord-marriage-bot)
 [![Known Vulnerabilities](https://snyk.io/test/github/dotboris/discord-marriage-bot/badge.svg?targetFile=package.json)](https://snyk.io/test/github/dotboris/discord-marriage-bot?targetFile=package.json)
 
 A discord bot that lets users get married.
