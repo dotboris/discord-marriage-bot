@@ -10,6 +10,9 @@
     "test": "mocha -r test/test_helper.js test",
     "lint": "eslint ."
   },
+  "engines": {
+    "node": "^10.8.0"
+  },
   "devDependencies": {
     "chai": "^4.1.2",
     "dirty-chai": "^2.0.1",
