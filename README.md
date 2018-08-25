@@ -20,3 +20,15 @@ TODO
     ```
 
 1.  TODO: configure discord bot and key
+
+### Running
+
+```sh
+yarn start ...
+```
+
+### Linting
+
+```sh
+yarn lint
+```
