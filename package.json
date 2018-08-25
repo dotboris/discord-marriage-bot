@@ -6,6 +6,15 @@
   "author": "Boris Bera <bera.boris@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node lib/cli.js"
+    "start": "node lib/cli.js",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^5.4.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^4.0.0",
+    "eslint-plugin-standard": "^3.1.0"
   }
 }
