@@ -5,6 +5,9 @@
   "repository": "https://github.com/dotboris/discord-marriage-bot",
   "author": "Boris Bera <bera.boris@gmail.com>",
   "license": "MIT",
+  "bin": {
+    "discord-marriage-bot": "./lib/cli.js"
+  },
   "scripts": {
     "start": "node lib/cli.js",
     "test": "nyc -a -n 'lib/**.js' mocha -r test/test_helper.js test",
