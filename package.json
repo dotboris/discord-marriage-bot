@@ -7,14 +7,16 @@
   "license": "MIT",
   "scripts": {
     "start": "node lib/cli.js",
-    "test": "mocha -r test/test_helper.js test",
-    "lint": "eslint ."
+    "test": "nyc -a -n 'lib/**.js' mocha -r test/test_helper.js test",
+    "lint": "eslint .",
+    "report-codecov": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "engines": {
     "node": "^10.8.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "codecov": "^3.0.4",
     "dirty-chai": "^2.0.1",
     "eslint": "^5.4.0",
     "eslint-config-standard": "^11.0.0",
@@ -22,6 +24,7 @@
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.0",
     "eslint-plugin-standard": "^3.1.0",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2"
   }
 }
