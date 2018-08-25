@@ -1,3 +1,3 @@
-const chai = require('chai');
+const chai = require('chai')
 
-chai.use(require('dirty-chai'));
+chai.use(require('dirty-chai'))
