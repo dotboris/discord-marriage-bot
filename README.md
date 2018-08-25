@@ -29,6 +29,12 @@ TODO
 yarn start ...
 ```
 
+### Test
+
+```sh
+yarn test
+```
+
 ### Linting
 
 ```sh
