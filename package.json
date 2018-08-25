@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node lib/cli.js",
-    "test": "nyc -a -n 'lib/**.js' mocha -r test/test_helper.js test",
+    "test": "nyc -a -n 'lib/**/*.js' mocha -r test/test_helper.js test",
     "lint": "eslint .",
     "report-codecov": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
