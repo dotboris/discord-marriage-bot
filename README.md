@@ -1,5 +1,7 @@
 # Discord Marriage Bot
 
+[![Known Vulnerabilities](https://snyk.io/test/github/dotboris/discord-marriage-bot/badge.svg?targetFile=package.json)](https://snyk.io/test/github/dotboris/discord-marriage-bot?targetFile=package.json)
+
 A discord bot that lets users get married.
 
 :rotating_light: This is a work in progress. We're no where near production
