@@ -1,0 +1,8 @@
+{
+  "name": "discord-marriage-bot",
+  "version": "0.0.0",
+  "description": "A discord bot that lets users get married",
+  "repository": "https://github.com/dotboris/discord-marriage-bot",
+  "author": "Boris Bera <bera.boris@gmail.com>",
+  "license": "MIT"
+}
