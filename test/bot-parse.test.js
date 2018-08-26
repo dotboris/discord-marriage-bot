@@ -15,7 +15,7 @@ function rawCommand (message) {
   }
 }
 
-describe('BotCommandParser', () => {
+describe('lib/bot-parse', () => {
   describe('isCommand', () => {
     it('should be truthy for user message starting with commandChar', () => {
       expect(botParse.isCommand(';', command(';', 'something')))
