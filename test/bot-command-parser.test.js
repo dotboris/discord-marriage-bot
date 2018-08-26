@@ -1,10 +1,15 @@
 const {expect} = require('chai')
 const BotCommandParser = require('../lib/bot-command-parser')
+const {Collection} = require('discord.js')
 
 function command (commandChar, name, ...args) {
+  return rawCommand([commandChar + name, ...args].join(' '))
+}
+
+function rawCommand (message) {
   return {
     author: {bot: false},
-    content: [commandChar + name, ...args].join(' '),
+    content: message,
     system: false,
     member: {}
   }
@@ -49,8 +54,30 @@ describe('BotCommandParser', () => {
   })
 
   describe('parseCommand', () => {
-    it('should extract command name')
-    it('should extract args')
-    it('should convert user mentions')
+    it('should extract command name', () => {
+      const res = parser.parseCommand(command(';', 'foobar', 'fi', 'fo', 'fum'))
+      expect(res).to.have.property('name', 'foobar')
+    })
+
+    it('should extract args', () => {
+      const res = parser.parseCommand(command(';', 'foobar', 'fi', 'fo', 'fum'))
+      expect(res).to.have.property('args').deep.equal(['fi', 'fo', 'fum'])
+    })
+
+    it('should deal with redundant spaces', () => {
+      const res = parser.parseCommand(rawCommand('   ;test  foo bar    baz   '))
+      expect(res).to.have.property('name', 'test')
+      expect(res).to.have.property('args').deep.equal(['foo', 'bar', 'baz'])
+    })
+
+    it('should convert user mentions', () => {
+      const c = command(';', 'foobar', 'fi', '<@1234567890>', 'fum')
+      c.mentions = {
+        users: new Collection([['1234567890', {username: 'fo'}]])
+      }
+
+      const res = parser.parseCommand(c)
+      expect(res).to.have.property('args').deep.equal(['fi', {username: 'fo'}, 'fum'])
+    })
   })
 })
