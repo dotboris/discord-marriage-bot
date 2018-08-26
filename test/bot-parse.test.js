@@ -1,6 +1,6 @@
 const {expect} = require('chai')
 const botParse = require('../lib/bot-parse')
-const {Collection} = require('discord.js')
+const {Collection, User} = require('discord.js')
 
 function command (commandChar, name, ...args) {
   return rawCommand([commandChar + name, ...args].join(' '))
@@ -73,6 +73,36 @@ describe('lib/bot-parse', () => {
 
       const res = botParse.parseCommand(c)
       expect(res).to.have.property('args').deep.equal(['fi', {username: 'fo'}, 'fum'])
+    })
+  })
+
+  describe('argsMatch', () => {
+    it('should match when the planets align', () => {
+      const args = ['foo', new User()]
+      const spec = ['string', 'user']
+
+      expect(botParse.argsMatch(args, spec)).to.be.true()
+    })
+
+    it('should fail when size different', () => {
+      const args = ['1', '2', '3']
+      const spec = ['string', 'string']
+
+      expect(botParse.argsMatch(args, spec)).to.be.false()
+    })
+
+    it('should recognize strings', () => {
+      const args = ['1', '2']
+      const spec = ['string', 'string']
+
+      expect(botParse.argsMatch(args, spec)).to.be.true()
+    })
+
+    it('should recognize user mentions', () => {
+      const args = [new User(), new User()]
+      const spec = ['user', 'user']
+
+      expect(botParse.argsMatch(args, spec)).to.be.true()
     })
   })
 })
