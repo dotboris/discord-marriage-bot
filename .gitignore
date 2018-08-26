@@ -1,3 +1,5 @@
+/.env
+
 # This is an npm package, so no lockfile
 /yarn.lock
 /package-lock.json

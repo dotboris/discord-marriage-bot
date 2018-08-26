@@ -9,7 +9,7 @@
     "discord-marriage-bot": "./lib/cli.js"
   },
   "scripts": {
-    "start": "node lib/cli.js",
+    "start": "node -r dotenv/config lib/cli.js",
     "test": "nyc -a -n 'lib/**/*.js' mocha -r test/test_helper.js test",
     "lint": "eslint .",
     "report-codecov": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
@@ -19,8 +19,10 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-truthy": "^1.0.0",
     "codecov": "^3.0.4",
     "dirty-chai": "^2.0.1",
+    "dotenv": "^6.0.0",
     "eslint": "^5.4.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.14.0",
