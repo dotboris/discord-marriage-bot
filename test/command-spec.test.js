@@ -38,4 +38,38 @@ describe('lib/command-spec', () => {
       expect(res).to.be.undefined()
     })
   })
+
+  describe('generateHelp', () => {
+    const COMMANDS = {
+      foobar: {
+        aliases: ['ALIAS1', 'ALIAS2'],
+        args: [
+          {name: 'thing'},
+          {name: '@someone'},
+          {name: 'stuff'}
+        ],
+        description: 'this is the description'
+      }
+    }
+
+    it('should contain command example', () => {
+      const res = CommandSpec.generateHelp(COMMANDS)
+
+      expect(res).to.include('foobar')
+      expect(res).to.include('thing @someone stuff')
+    })
+
+    it('should contain aliases', () => {
+      const res = CommandSpec.generateHelp(COMMANDS)
+
+      expect(res).to.include('ALIAS1')
+      expect(res).to.include('ALIAS2')
+    })
+
+    it('should contain description', () => {
+      const res = CommandSpec.generateHelp(COMMANDS)
+
+      expect(res).to.include('this is the description')
+    })
+  })
 })
