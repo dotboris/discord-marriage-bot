@@ -30,7 +30,8 @@
     "eslint-plugin-promise": "^4.0.0",
     "eslint-plugin-standard": "^3.1.0",
     "mocha": "^5.2.0",
-    "nyc": "^12.0.2"
+    "nyc": "^12.0.2",
+    "sinon": "^6.1.5"
   },
   "dependencies": {
     "debug": "^3.1.0",
@@ -38,6 +39,7 @@
     "lodash.every": "^4.6.0",
     "lodash.flatmap": "^4.5.0",
     "lodash.zip": "^4.2.0",
+    "sinon-chai": "^3.2.0",
     "yargs": "^12.0.1"
   }
 }
