@@ -36,10 +36,12 @@
   "dependencies": {
     "debug": "^3.1.0",
     "discord.js": "^11.4.2",
+    "fs-extra": "^7.0.0",
     "lodash.every": "^4.6.0",
     "lodash.flatmap": "^4.5.0",
     "lodash.zip": "^4.2.0",
     "sinon-chai": "^3.2.0",
+    "sqlite": "^3.0.0",
     "yargs": "^12.0.1"
   }
 }
