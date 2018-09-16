@@ -37,6 +37,30 @@ describe('lib/relationships', () => {
     })
   })
 
+  describe('delete', () => {
+    it('should remove existing relationship', async () => {
+      await relationships.add(db, 1, 2, 'foobar')
+      const before = await relationships.inRelationship(db, 1, 2)
+      expect(before).to.be.true()
+
+      await relationships.delete(db, 1, 2)
+
+      const after = await relationships.inRelationship(db, 1, 2)
+      expect(after).to.be.false()
+    })
+
+    it('should remove existing relationship in wrong order', async () => {
+      await relationships.add(db, 1, 2, 'foobar')
+      const before = await relationships.inRelationship(db, 1, 2)
+      expect(before).to.be.true()
+
+      await relationships.delete(db, 2, 1)
+
+      const after = await relationships.inRelationship(db, 1, 2)
+      expect(after).to.be.false()
+    })
+  })
+
   describe('inRelationships', () => {
     it('should return true if both people in right order', async () => {
       await relationships.add(db, 1, 2, 'foobar')
@@ -87,10 +111,10 @@ describe('lib/relationships', () => {
       const res = await relationships.getRelationships(db, 1)
 
       expect(res).to.deep.equal([
-        { person: 2, type: 'dating' },
-        { person: 3, type: 'married' },
-        { person: 4, type: 'dating' },
-        { person: 5, type: 'married' }
+        { person: '2', type: 'dating' },
+        { person: '3', type: 'married' },
+        { person: '4', type: 'dating' },
+        { person: '5', type: 'married' }
       ])
     })
 
