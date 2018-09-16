@@ -1,80 +1,43 @@
 const questions = require('../lib/questions')
 const {expect} = require('chai')
 const {promisify} = require('util')
-const sinon = require('sinon')
 
 const delay = promisify(setTimeout)
 
 describe('lib/questions', () => {
-  let db
-  beforeEach(() => {
-    db = questions.createDb()
+  it('should timeout on its own', async () => {
+    const q = await questions.create(20).promise
+
+    expect(q).to.deep.equal({ timeout: true })
   })
 
-  it('should exist after created', () => {
-    questions.create(db, 'foo', 'bar', 1, {onTimeout: () => {}})
+  it('should timeout when awaited after timeout', async () => {
+    const q = questions.create(20)
 
-    expect(questions.isAsking(db, 'foo')).to.be.true()
-    expect(questions.isAsking(db, 'bar')).to.be.false()
-    expect(questions.isBeingAsked(db, 'foo')).to.be.false()
-    expect(questions.isBeingAsked(db, 'bar')).to.be.true()
+    await delay(21)
+    const res = await q.promise
+    expect(res).to.deep.equal({ timeout: true })
   })
 
-  it('should trigger timeout event after specified timeout', async () => {
-    const onTimeout = sinon.spy()
-
-    questions.create(db, 'foo', 'bar', 50, {onTimeout})
+  it('should not trigger timeout when answered', async () => {
+    const q = questions.create(50)
 
     await delay(25)
-    expect(onTimeout).not.to.have.been.called()
+    questions.answer(q, 'gumbo')
 
     await delay(30)
-    expect(onTimeout).to.have.been.called()
+    const res = await q.promise
+    expect(res).to.have.property('timeout', false)
   })
 
-  it('should be gone after timeout', async () => {
-    questions.create(db, 'foo', 'bar', 50, {onTimeout: () => {}})
+  it('should return answer when given in time', async () => {
+    const q = questions.create(50)
 
     await delay(25)
-    expect(questions.isAsking(db, 'foo')).to.be.true()
-    expect(questions.isBeingAsked(db, 'bar')).to.be.true()
-
-    await delay(30)
-    expect(questions.isAsking(db, 'foo')).to.be.false()
-    expect(questions.isBeingAsked(db, 'bar')).to.be.false()
-  })
-
-  it('should not trigger timeout event if answered', async () => {
-    const onTimeout = sinon.spy()
-    questions.create(db, 'foo', 'bar', 50, {onAnswer: () => {}, onTimeout})
-
-    await delay(25)
-    questions.answer(db, 'bar', 'gumbo')
-
-    await delay(30)
-    expect(onTimeout).to.not.have.been.called()
-  })
-
-  it('should trigger answer event after answer', async () => {
-    const onAnswer = sinon.spy()
-    questions.create(db, 'foo', 'bar', 50, {onAnswer})
-
-    await delay(25)
-    questions.answer(db, 'bar', 'gumbo')
+    questions.answer(q, 'gumbo')
 
     await delay(10)
-    expect(onAnswer).to.have.been.calledWith('gumbo')
-  })
-
-  it('should be gone after answer', async () => {
-    questions.create(db, 'foo', 'bar', 50, {onAnswer: () => {}})
-
-    await delay(25)
-
-    expect(questions.isAsking(db, 'foo')).to.be.true()
-    expect(questions.isBeingAsked(db, 'bar')).to.be.true()
-    questions.answer(db, 'bar', 'whatever')
-    expect(questions.isAsking(db, 'foo')).to.be.false()
-    expect(questions.isBeingAsked(db, 'bar')).to.be.false()
+    const res = await q.promise
+    expect(res).to.deep.equal({ timeout: false, answer: 'gumbo' })
   })
 })
