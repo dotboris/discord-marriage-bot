@@ -56,13 +56,15 @@ describe('lib/bot-parse', () => {
 
     it('should extract args', () => {
       const res = botParse.parseCommand(command(';', 'foobar', 'fi', 'fo', 'fum'))
-      expect(res).to.have.property('args').deep.equal(['fi', 'fo', 'fum'])
+      expect(res).to.have.property('args')
+      expect(res.args).to.deep.equal(['fi', 'fo', 'fum'])
     })
 
     it('should deal with redundant spaces', () => {
       const res = botParse.parseCommand(rawCommand('   ;test  foo bar    baz   '))
       expect(res).to.have.property('name', 'test')
-      expect(res).to.have.property('args').deep.equal(['foo', 'bar', 'baz'])
+      expect(res).to.have.property('args')
+      expect(res.args).to.deep.equal(['foo', 'bar', 'baz'])
     })
 
     it('should convert user mentions', () => {
@@ -72,7 +74,8 @@ describe('lib/bot-parse', () => {
       }
 
       const res = botParse.parseCommand(c)
-      expect(res).to.have.property('args').deep.equal(['fi', {username: 'fo'}, 'fum'])
+      expect(res).to.have.property('args')
+      expect(res.args).to.deep.equal(['fi', {username: 'fo'}, 'fum'])
     })
   })
 

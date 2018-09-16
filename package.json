@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
     "chai-truthy": "^1.0.0",
     "codecov": "^3.0.4",
     "dirty-chai": "^2.0.1",
