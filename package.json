@@ -1,12 +1,12 @@
 {
-  "name": "discord-marriage-bot",
+  "name": "discord-family-bot",
   "version": "0.0.0",
-  "description": "A discord bot that lets users get married",
-  "repository": "https://github.com/dotboris/discord-marriage-bot",
+  "description": "A discord bot that lets you build the family you always wanted",
+  "repository": "https://github.com/dotboris/discord-family-bot",
   "author": "Boris Bera <bera.boris@gmail.com>",
   "license": "MIT",
   "bin": {
-    "discord-marriage-bot": "./lib/cli.js"
+    "discord-family-bot": "./lib/cli.js"
   },
   "scripts": {
     "start": "node -r dotenv/config lib/cli.js",
